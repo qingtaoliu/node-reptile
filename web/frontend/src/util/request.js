@@ -3,7 +3,7 @@
  */
 import axios from 'axios'
 
-let base = 'http://localhost:8080'
+let base = ''
 
 axios.interceptors.request.use((config) => {
     return config

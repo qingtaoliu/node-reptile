@@ -21,7 +21,7 @@
         <el-pagination
             background
             layout="prev, pager, next"
-            :total="1000"
+            :total="total"
             @current-change="pagination"
         >
         </el-pagination>
@@ -32,7 +32,8 @@ export default {
     name: 'yuemei',
     data () {
         return {
-            list: []
+            list: [],
+            total: 0
         }
     },
     mounted () {
@@ -44,7 +45,8 @@ export default {
             var count = 10
             var _this = this
             this.$requestGet(`/api/yuemei/_data?page=${pages}&count=${count}`).then(res => {
-                _this.list = res.data.data
+                _this.list = res.data.data.list
+                _this.total = res.data.data.total
             })
         },
         pagination (val) {

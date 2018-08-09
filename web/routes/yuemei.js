@@ -9,11 +9,15 @@ function getData(req, res) {
     var limit = req.query.count || 20;
     db.get('yuemei').find({}, (err, docs) => {
         var data = docs.slice((page - 1) * limit, page * limit)
+        var total = docs.length;
         res.end(
             JSON.stringify({
                 error: 0,
                 massage: '',
-                data: data
+                data: {
+                    list: data,
+                    total: total
+                },
             })
         )
     })
