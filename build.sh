@@ -6,6 +6,6 @@ echo '结束编译'
 
 echo 'start cp'
 cp dist/index.html /srv/apps/node-reptile/web/public/index.html
-cp -r dist/static/* /srv/apps/node-reptile/web/public
+cp -r dist/static/* /srv/apps/node-reptile/web/public/static/
 
 echo 'end cp'
