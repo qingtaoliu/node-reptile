@@ -4,18 +4,23 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import store from '@/store'
 import 'element-ui/lib/theme-chalk/index.css'
 import {postRequest, getRequest} from '@/util/request'
 
 Vue.config.productionTip = true
 Vue.use(ElementUI)
 
+store.dispatch('fetchUser')
+
 Vue.prototype.$requestGet = getRequest
 Vue.prototype.$requestPost = postRequest
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
+    store,
     components: {App},
     template: '<App/>'
 })

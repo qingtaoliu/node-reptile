@@ -1,12 +1,12 @@
 <template>
     <div class='login-box'>
-        <el-form :model="ruleForm2" status-icon ref="ruleForm2" label-width="100px"
+        <el-form :model="info" status-icon ref="info" label-width="100px"
                  class="demo-ruleForm">
             <el-form-item label="账号" prop="pass">
-                <el-input type="number" v-model="ruleForm2.user" ></el-input>
+                <el-input type="text" v-model="info.user" ></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="pass">
-                <el-input type="password" v-model="ruleForm2.pass"></el-input>
+                <el-input type="password" v-model="info.pass"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm">登录</el-button>
@@ -19,20 +19,30 @@
 export default {
     data () {
         return {
-            ruleForm2: {
+            info: {
                 pass: '',
                 user: ''
             }
         }
     },
     methods: {
-        submitForm (formName) {
+        submitForm () {
             var info = {
-                user: this.user,
-                pass: this.pass
+                user: this.info.user,
+                pass: this.info.pass
             }
-            this.$requestPost('/login/_data', info).then(() => {
-
+            this.$requestPost('/api/login/_data', info).then((res) => {
+                if (res.data.error === 0) {
+                    this.$store.dispatch('createUser', res.data.data)
+                    this.$router.push('/')
+                } else {
+                    this.$message({
+                        message: res.data.message,
+                        center: true,
+                        type: 'error',
+                        duration: 1000
+                    })
+                }
             })
         }
     }

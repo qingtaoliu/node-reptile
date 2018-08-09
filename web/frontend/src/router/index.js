@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+import grads from './grads.js'
+
 import Index from '@/view/Index'
 import Login from '@/view/Login'
 
 import YueMei from '@/view/YueMei'
 
 Vue.use(Router)
-
 export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Index',
+            name: 'index',
             component: Index,
+            beforeEnter: grads.current,
             children: [
                 {
                     path: '/yuemei',
@@ -24,7 +25,7 @@ export default new Router({
         },
         {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: Login
         }
     ]
