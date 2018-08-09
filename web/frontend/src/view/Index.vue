@@ -20,7 +20,7 @@
                     <el-dropdown-item>删除</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
-            <span>柳青涛</span>
+            <span>{{ userInfo.name }}</span>
         </el-header>
 
         <el-main>
@@ -34,6 +34,15 @@
 
 <script>
 export default {
+    data () {
+        return {
+            userInfo: {
+                name: '柳青涛',
+                id: 1,
+                portrait: ''
+            }
+        }
+    }
 }
 </script>
 <style>

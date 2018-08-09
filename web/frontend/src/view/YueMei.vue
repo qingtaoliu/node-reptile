@@ -43,7 +43,7 @@ export default {
             var pages = page || 1
             var count = 10
             var _this = this
-            this.$request.get(`/api/yuemei/_data?page=${pages}&count=${count}`).then(res => {
+            this.$requestGet(`/api/yuemei/_data?page=${pages}&count=${count}`).then(res => {
                 _this.list = res.data.data
             })
         },
