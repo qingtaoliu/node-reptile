@@ -3,5 +3,5 @@
  */
 export default {
     mongoUrl: 'localhost:27017/reptile',
-    proxy: 'xxxx', // 代理自行购买
+    proxy: 'http://dps.kdlapi.com/api/getdps/', // 代理自行购买
 }
