@@ -9,9 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.1",
+    "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
+    "log4": "^3.0.1",
+    "log4js": "^3.0.4",
     "monk": "^6.0.6",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
