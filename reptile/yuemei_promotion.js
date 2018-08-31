@@ -82,35 +82,39 @@ class yueMeiPromotion {
         console.log('代理位置' + _this.proxyNum)
         console.log('请求次数' + this.requestNum)
         _this.requestNum++
-        request(params, (req, res, body) => {
-            let $ = cheerio.load(body)
-            let list = $('.serve-cont a');
-            let next_url = $('.next').attr('href')
-            let obj = {}
-            list.each(item => {
-                obj = {
-                    url: list.eq(item).attr('href'),
-                    server_id: list.eq(item).attr('href').replace(/[^0-9]/ig, ""),
-                    server_name: this.entityToString(list.eq(item).find('p.teyao-tit').html()),
-                    doctor: this.entityToString(list.eq(item).find('.infoTit2').html()).replace(/\s+/g, "").split('，')[0],
-                    hospital: this.entityToString(list.eq(item).find('.infoTit2').html()),
-                    price: list.eq(item).find('.ft20').html()
+        request(params, (err, res, body) => {
+            try {
+                let $ = cheerio.load(body)
+                let list = $('.serve-cont a');
+                let next_url = $('.next').attr('href')
+                let obj = {}
+                list.each(item => {
+                    obj = {
+                        url: list.eq(item).attr('href'),
+                        server_id: list.eq(item).attr('href').replace(/[^0-9]/ig, ""),
+                        server_name: this.entityToString(list.eq(item).find('p.teyao-tit').html()),
+                        doctor: this.entityToString(list.eq(item).find('.infoTit2').html()).replace(/\s+/g, "").split('，')[0],
+                        hospital: this.entityToString(list.eq(item).find('.infoTit2').html()),
+                        price: list.eq(item).find('.ft20').html()
+                    }
+                    _this.saveData(obj)
+                })
+                if (next_url) {
+                    _this.rp(next_url)
+                } else {
+                    console.log('没有了')
                 }
-                _this.saveData(obj)
-            })
-            if (next_url) {
-                _this.rp(next_url)
-            } else {
-                console.log('没有了')
+                if (_this.requestNum > 20) {
+                    _this.proxyNum++
+                    _this.requestNum = 0
+                }
+                if (_this.proxyNum >= _this.proxyList.length) {
+                    _this.proxy()
+                }
+            } catch (err) {
+                console.log(err)
+                _this.rp()
             }
-            if (_this.requestNum > 20) {
-                _this.proxyNum++
-                _this.requestNum = 0
-            }
-            if (_this.proxyNum >= _this.proxyList.length) {
-                _this.proxy()
-            }
-
         })
     }
 
