@@ -34,7 +34,7 @@ process.env.UV_THREADPOOL_SIZE = 128
 class yueMeiPromotion {
     staticOption() {
         return {
-            url: 'https://m.yuemei.com/tao/beijing/p210.html',
+            url: 'https://m.yuemei.com/tao/beijing/p1.html',
             method: 'GET',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
